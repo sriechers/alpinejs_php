@@ -1,0 +1,41 @@
+{
+	"Create AlpineJS PHP Component": {
+		"prefix": "@template",
+		"body": [
+			"<?php",
+			"// Destructure \\$_STATE Array",
+			"['${1:value}'=>\\$${1:value}] = \\$_STATE;",
+			"",
+			"// get the key for the value variable",
+			"\\$${2:value_key} = get_key(\\$${3:value}, \\$_STATE);",
+			"?>",
+			"",
+			"<div",
+			"  x-data=\"{<?=\\$_ALPINE_STATE?>}\"",
+			"  x-cloak",
+			">",
+			"$0",
+			"</div>",
+			"",
+			"<script defer>",
+			"",
+			"</script>"
+		]
+	},
+	"Create Component Function": {
+		"prefix": "@component",
+		"body": [
+			"<?php",
+			"Component(",
+			"  template: \"${1:path_to_component}/${2:component_name}.php\",",
+			"  state: [",
+			"	   \"${3:myValue}\" => \"'${4:myValue}'\" ",
+			"  ],",
+			"  props: [",
+			"    \"${5:myAdditionalData}\"=>\"${6:test}\"",
+			"  ]",
+			");",
+			"?>"
+		]
+	}
+}
