@@ -3,6 +3,7 @@
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
   require_once("./alpinejs-renderer/Component.php");
+  require_once("./alpinejs-renderer/ComponentManager.php");
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +27,13 @@
     display: none !important;
   }
   </style>
+
 </head>
 
 <body>
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Button mit Zähler</h2>
-        <?php
+    <?php
     Component(
       template: "./components/like_button.php",
       state: [
@@ -40,25 +42,21 @@
       ],
       props: [
         "class"=>"likeButton mb-5",
-      ],
-      // options: [
-      //   "allow_duplicate_scripts"=>true
-      // ]
+      ]
     );
 
     Component(
       template: "./components/like_button.php",
       state: [
         "count"=> 10,
-        "title"=>"'Ich bin ein toller Button!'"
+        "title"=>"'Ich bin ein zweiter toller Button!'"
       ],
       props: [
         "class"=>"likeButton mb-5",
-      ],
-      // options: [
-      //   "allow_duplicate_scripts"=>true
-      // ]
+      ]
     );
+
+    // echo(json_encode($GLOBALS["components"]));
     ?>
   </section>
 
@@ -66,20 +64,20 @@
 
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Dropdown Menü<h2>
-        <?php   
-    // Component(  
-    //   template: "./components/dropdown.php",
-    //   state: [
-    //     "title"=>"'dropdown'",
-    //     "open"=>false
-    //   ],
-    //   props: [
-    //     "add_task_below"=>"add task below",
-    //     "add_task_above"=>"add task above",
-    //     "edit_task"=>"edit",
-    //     "delete_task"=>"delete"
-    //   ]
-    // );
+    <?php   
+    Component(  
+      template: "./components/dropdown.php",
+      state: [
+        "title"=>"'dropdown'",
+        "open"=>false
+      ],
+      props: [
+        "add_task_below"=>"add task below",
+        "add_task_above"=>"add task above",
+        "edit_task"=>"edit",
+        "delete_task"=>"delete"
+      ]
+    );
     ?>
   </section>
 
@@ -87,18 +85,18 @@
 
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Formular (mit localStorage)<h2>
-        <?php   
-    // Component(  
-    //   template: "./components/form/form.php",
-    //   state: [],
-    //   props: [
-    //     "action"=>$_SERVER['PHP_SELF'],
-    //     "method"=>"POST",
-    //     "use_persisted_form_state"=>true,
-    //     "storage_type"=>"localStorage",
-    //     "storage_name"=>"my_form_state"
-    //   ]
-    // );
+    <?php   
+    Component(  
+      template: "./components/form/form.php",
+      state: [],
+      props: [
+        "action"=>$_SERVER['PHP_SELF'],
+        "method"=>"POST",
+        "use_persisted_form_state"=>true,
+        "storage_type"=>"localStorage",
+        "storage_name"=>"my_form_state"
+      ]
+    );
     ?>
   </section>
 
@@ -107,22 +105,22 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Accordion Gruppe</h2>
     <?php
-    // Component(
-    //   template: "./components/accordion_group.php",
-    //   props: [
-    //     "items" => [
-    //       [
-    //         "title"=>"test 1",
-    //         "content"=>"That's nice! ✌️"
-    //       ],
-    //       [
-    //         "title"=>"test 2",
-    //         "content"=>"Test 2 <strong>content</strong> woooow!"
-    //       ]
-    //     ],
-    //     "selected_item_index"=>2
-    // ]
-    // );
+    Component(
+      template: "./components/accordion_group.php",
+      props: [
+        "items" => [
+          [
+            "title"=>"test 1",
+            "content"=>"That's nice! ✌️"
+          ],
+          [
+            "title"=>"test 2",
+            "content"=>"Test 2 <strong>content</strong> woooow!"
+          ]
+        ],
+        "selected_item_index"=>2
+    ]
+    );
     ?>
   </section>
 
@@ -131,12 +129,12 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Passwort Feld</h2>
     <?php   
-    // Component(  
-    //   template: "./components/password_input.php",
-    //   state: [
-    //     "isVisible"=>false,
-    //   ]
-    // );
+    Component(  
+      template: "./components/password_input.php",
+      state: [
+        "isVisible"=>false,
+      ]
+    );
     ?>
   </section>
 
@@ -145,12 +143,12 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Modal</h2>
     <?php
-    // Component(
-    //   template: "./components/modal.php",
-    //   state: [
-    //     "open" => false 
-    //   ]
-    // );
+    Component(
+      template: "./components/modal.php",
+      state: [
+        "open" => false 
+      ]
+    );
     ?>
   </section>
 
@@ -159,14 +157,20 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Liste mit Suche</h2>
     <?php
-  // Component(
-  //   template: "./components/searchable_list.php",
-  //   props: [
-  //     "items"=>"test"
-  //   ]
-  // );
-  ?>
+    Component(
+      template: "./components/searchable_list.php",
+      props: [
+        "items"=>"test"
+      ]
+    );
+    ?>
   </section>
+
+  <?php 
+  echo ComponentManager::get_styles();
+  echo ComponentManager::get_scripts();
+  ?>
 </body>
+
 
 </html>

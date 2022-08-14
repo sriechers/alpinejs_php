@@ -9,5 +9,16 @@
   </div>
 </div>
 
-<script>
+<!-- <link rel="test2" href="assad" data-include-once/> -->
+
+<script data-include-once>
+  console.log("included")
 </script>
+
+<style data-include-once>
+  button {
+    outline: 2px solid red;
+  }
+</style>
+
+<script src="asasdads" data-include-once defer></script>

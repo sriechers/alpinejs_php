@@ -1,4 +1,4 @@
-<div class="pt-8" x-data="data<?=$_COMPONENT_ID?>()">
+<div class="pt-8" x-data="data<?=$_UNIQUE_ID?>()">
   <input x-ref="searchField" x-model="search" x-on:keydown.window.prevent.slash="$refs.searchField.focus()"
     placeholder="Search for an employee..." type="search"
     class="block w-full bg-slate-100 focus:outline-none focus:bg-white focus:shadow text-gray-500 rounded-lg px-4 py-3" />
@@ -17,7 +17,7 @@
 </div>
 
 <script defer>
-function data<?=$_COMPONENT_ID?>() {
+function data<?=$_UNIQUE_ID?>() {
   return {
     search: "",
     items: [{

@@ -1,7 +1,7 @@
 <?php 
   $storage_type = isset($_PROPS["storage_type"]) ? $_PROPS["storage_type"] : "localStorage";
 ?>
-<form x-data @submit.prevent="submitForm<?=$_COMPONENT_ID?>" action="<?=$_PROPS['action']?>"
+<form x-data @submit.prevent="submitForm<?=$_UNIQUE_ID?>" action="<?=$_PROPS['action']?>"
   method="<?=$_PROPS['method']?>">
   <?php
       Component(  
@@ -13,7 +13,7 @@
             "value"=>"''"
           ],
         props: [
-          "parent_id"=>$_COMPONENT_ID
+          "parent_id"=>$_UNIQUE_ID
         ]
       );
       Component(
@@ -25,20 +25,20 @@
           "value"=>"''"
         ],
         props: [
-          "parent_id"=>$_COMPONENT_ID
+          "parent_id"=>$_UNIQUE_ID
         ]
       );
   ?>
   <button class="bg-blue-500 text-white px-2 py-1 mt-2 rounded-md">Submit</button>
 
   <div class="mt-7">
-    <span x-text="JSON.stringify($store.form_<?=$_COMPONENT_ID?>.formData)"></span>
+    <span x-text="JSON.stringify($store.form_<?=$_UNIQUE_ID?>.formData)"></span>
   </div>
 </form>
 
 <script defer>
-function submitForm<?=$_COMPONENT_ID?>() {
-  const data = Object.assign({}, Alpine.store("form_<?=$_COMPONENT_ID?>").formData);
+function submitForm<?=$_UNIQUE_ID?>() {
+  const data = Object.assign({}, Alpine.store("form_<?=$_UNIQUE_ID?>").formData);
   console.log("Submit", data);
 }
 
@@ -46,7 +46,7 @@ document.addEventListener('alpine:init', () => {
   const persistStore =
     <?=isset($_PROPS["use_persisted_form_state"]) && $_PROPS["use_persisted_form_state"] === true ? "true" : "false"?>;
 
-  Alpine.store("form_<?=$_COMPONENT_ID?>", {
+  Alpine.store("form_<?=$_UNIQUE_ID?>", {
     formData: persistStore ? (JSON.parse(window.<?=$storage_type?>.getItem(
       "<?=$_PROPS['storage_name']?>")) || {}) : {},
     update({

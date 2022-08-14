@@ -14,7 +14,7 @@
         for($i = 0; $i < count($_PROPS["items"]); $i++) {
         $items = $_PROPS["items"];
         $real_index = $i + 1;
-        $container_name = "container_".$real_index."_".$_COMPONENT_ID; 
+        $container_name = "container_".$real_index."_".$_UNIQUE_ID; 
       ?>
     <li data-id="<?=$container_name?>" class="relative border-b border-gray-200">
 
