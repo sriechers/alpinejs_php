@@ -56,6 +56,7 @@
       //       $content = str_replace($tag, "", $content);
       //       continue;
       //     } else {
+      //       $content = str_replace($tag, "", $content);
       //       ComponentManager::add_style($tag);
       //     }
 
@@ -79,6 +80,7 @@
               $content = str_replace($tag, "", $content);
               continue;
             } else {
+              $content = str_replace($tag, "", $content);
               ComponentManager::add_script($tag);
             }
           }
@@ -88,6 +90,7 @@
               $content = str_replace($tag, "", $content);
               continue;
             } else {
+              $content = str_replace($tag, "", $content);
               ComponentManager::add_style($tag);
             }
           }
