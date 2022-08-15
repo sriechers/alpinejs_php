@@ -1,10 +1,11 @@
 <?php 
+  $ComponentManager = new ComponentManager();
   $storage_type = isset($_PROPS["storage_type"]) ? $_PROPS["storage_type"] : "localStorage";
 ?>
 <form x-data @submit.prevent="submitForm<?=$_UNIQUE_ID?>" action="<?=$_PROPS['action']?>"
   method="<?=$_PROPS['method']?>">
   <?php
-      Component(  
+      $ComponentManager->component(  
         template: "./components/form/formInputField.php",
         state: [
             "label"=>"'E-Mail:'",
@@ -16,7 +17,7 @@
           "parent_id"=>$_UNIQUE_ID
         ]
       );
-      Component(
+      $ComponentManager->component(
         template: "./components/form/formInputField.php",
         state: [
           "label"=>"'Password:'",
