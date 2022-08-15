@@ -42,6 +42,42 @@
       return $output;
     }
 
+    private static function handle_tags($matches, $data){
+      $content = $data;
+      if($matches && count($matches) > 0){
+        foreach($matches as $match){
+          $tag = $match[0];
+          $tag_name = $match[2];
+          $include_only_once = str_contains($tag, "data-include-once");
+
+          if($tag_name === "script"){
+            if($include_only_once && ComponentManager::includes($tag, "script")){
+              $content = str_replace($tag, "", $content);
+              continue;
+            } else {
+              $content = str_replace($tag, "", $content);
+              ComponentManager::add_script($tag);
+            }
+          }
+
+          if($tag_name === "style" || $tag_name === "link"){
+            if($include_only_once && ComponentManager::includes($tag, "style")){
+              $content = str_replace($tag, "", $content);
+              continue;
+            } else {
+              $content = str_replace($tag, "", $content);
+              ComponentManager::add_style($tag);
+            }
+          }
+
+          // tag löschen
+          $content = str_replace($tag, "", $content);
+
+        }
+      }
+      return $content;
+    }
+
     /**
      * component
      *
@@ -83,65 +119,15 @@
         $matches = null;
         $content = $buffer;
   
-        // // Self closing link tags
-        // $self_closing_tag_reg_ex = "%(<(link)\s*.*.?/>)%mi"; 
-        // preg_match_all($self_closing_tag_reg_ex, $content, $matches, PREG_SET_ORDER);
-  
-        // if($matches && count($matches) > 0){
-        //   foreach($matches as $match){
-            
-        //     $tag = $match[1];
-        //     // $tag_name = $match[2];
-        //     $include_only_once = $tag ? str_contains($tag, "data-include-once") : false;
-  
-        //     if($include_only_once && ComponentManager::includes($tag, "script")){
-        //       $content = str_replace($tag, "", $content);
-        //       continue;
-        //     } else {
-        //       $content = str_replace($tag, "", $content);
-        //       ComponentManager::add_style($tag);
-        //     }
-  
-        //     // tag löschen
-        //     $content = str_replace($tag, "", $content);
-        //   }
-        // }
-  
+        // Self closing link tags
+        $self_closing_tag_reg_ex = "%(<(link)\s*.*.?/>)%mi"; 
+        preg_match_all($self_closing_tag_reg_ex, $content, $matches, PREG_SET_ORDER);
+        $content = self::handle_tags($matches, $content);
+        
+        // Normal Tags
         $tag_reg_ex = "%(<(script|style)\s*.*.?>)(.|\n)*?</(script|style)>%mi";
-        // Match tags
         preg_match_all($tag_reg_ex, $content, $matches, PREG_SET_ORDER);
-  
-        if($matches && count($matches) > 0){
-          foreach($matches as $match){
-            $tag = $match[0];
-            $tag_name = $match[2];
-            $include_only_once = $tag ? str_contains($tag, "data-include-once") : false;
-  
-            if($tag_name === "script"){
-              if($include_only_once && ComponentManager::includes($tag, "script")){
-                $content = str_replace($tag, "", $content);
-                continue;
-              } else {
-                $content = str_replace($tag, "", $content);
-                ComponentManager::add_script($tag);
-              }
-            }
-  
-            if($tag_name === "style"){
-              if($include_only_once && ComponentManager::includes($tag, "style")){
-                $content = str_replace($tag, "", $content);
-                continue;
-              } else {
-                $content = str_replace($tag, "", $content);
-                ComponentManager::add_style($tag);
-              }
-            }
-  
-            // tag löschen
-            $content = str_replace($tag, "", $content);
-  
-          }
-        }
+        $content = self::handle_tags($matches, $content);
   
         $GLOBALS["parsed_components"][] = $_COMPONENT_GROUP_ID;
         return $content;

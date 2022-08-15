@@ -33,6 +33,32 @@
 
 <body>
   <section class="my-20">
+    <h2 class="text-4xl font-bold text-slate-800 mb-4">Test</h2>
+    <?php
+    $ComponentManager->component(
+      template: "./components/test/test.php",
+      props: [
+        "index"=>"1"
+      ]
+    );
+
+    $ComponentManager->component(
+      template: "./components/test/test.php",
+      props: [
+        "index"=>"2"
+      ]
+    );
+
+    $ComponentManager->component(
+      template: "./components/test/test.php",
+      props: [
+        "index"=>"3"
+      ]
+    );
+    ?>
+  </section>
+
+  <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Button mit Zähler</h2>
     <?php
     $ComponentManager->component(

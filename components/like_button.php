@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<!-- <link rel="test2" href="assad" data-include-once/> -->
+<link rel="test2" href="assad" data-include-once/>
 
 <script data-include-once>
   console.log("included")
