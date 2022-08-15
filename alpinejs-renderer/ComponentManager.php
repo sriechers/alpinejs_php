@@ -1,5 +1,5 @@
 <?php 
-  require_once("./alpinejs-renderer/utils/format_alpinejs_state_object.php");
+  require_once(__DIR__."/utils/format_alpinejs_state_object.php");
   class ComponentManager {
     private static $style_tags = array();
     private static $script_tags = array();
@@ -99,7 +99,7 @@
     */
     public function component(string $template, $state = array(), $props = array()){
       // require_once("./alpinejs-renderer/ComponentManager.php");
-      include_once("./alpinejs-renderer/utils/get_key.php");
+      include_once(__DIR__."/utils/get_key.php");
   
       if(!file_exists($template)){
         throw new ErrorException("Component does not exist: $template");
