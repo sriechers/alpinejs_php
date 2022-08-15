@@ -14,3 +14,9 @@
 <script data-include-once>
   console.log("included")
 </script>
+
+<style data-include-once>
+  .test {
+    color: red;
+  }
+</style>

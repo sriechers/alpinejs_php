@@ -2,8 +2,9 @@
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
-  require_once("./alpinejs-renderer/Component.php");
+  // require_once("./alpinejs-renderer/Component.php");
   require_once("./alpinejs-renderer/ComponentManager.php");
+  $ComponentManager = new ComponentManager();
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Button mit Zähler</h2>
     <?php
-    Component(
+    $ComponentManager->component(
       template: "./components/like_button.php",
       state: [
         "count"=> 10,
@@ -45,7 +46,7 @@
       ]
     );
 
-    Component(
+    $ComponentManager->component(
       template: "./components/like_button.php",
       state: [
         "count"=> 10,
@@ -56,16 +57,16 @@
       ]
     );
 
-    // echo(json_encode($GLOBALS["components"]));
     ?>
   </section>
+
 
   <hr class="border-1 border-slate-100">
 
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Dropdown Menü<h2>
     <?php   
-    Component(  
+    $ComponentManager->component(  
       template: "./components/dropdown.php",
       state: [
         "title"=>"'dropdown'",
@@ -86,7 +87,7 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Formular (mit localStorage)<h2>
     <?php   
-    Component(  
+    $ComponentManager->component(  
       template: "./components/form/form.php",
       state: [],
       props: [
@@ -105,7 +106,7 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Accordion Gruppe</h2>
     <?php
-    Component(
+    $ComponentManager->component(
       template: "./components/accordion_group.php",
       props: [
         "items" => [
@@ -129,7 +130,7 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Passwort Feld</h2>
     <?php   
-    Component(  
+    $ComponentManager->component(  
       template: "./components/password_input.php",
       state: [
         "isVisible"=>false,
@@ -143,7 +144,7 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Modal</h2>
     <?php
-    Component(
+    $ComponentManager->component(
       template: "./components/modal.php",
       state: [
         "open" => false 
@@ -157,7 +158,7 @@
   <section class="my-20">
     <h2 class="text-4xl font-bold text-slate-800 mb-4">Liste mit Suche</h2>
     <?php
-    Component(
+    $ComponentManager->component(
       template: "./components/searchable_list.php",
       props: [
         "items"=>"test"
